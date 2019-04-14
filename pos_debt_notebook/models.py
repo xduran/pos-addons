@@ -1,4 +1,4 @@
-# Copyright 2014-2018 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
+# Copyright 2014-2019 Ivan Yelizariev <https://it-projects.info/team/yelizariev>
 # Copyright 2015 Alexis de Lattre <https://github.com/alexis-via>
 # Copyright 2016-2017 Stanislav Krotov <https://it-projects.info/team/ufaks>
 # Copyright 2016 Florent Thomas <https://it-projects.info/team/flotho>
@@ -540,9 +540,7 @@ class PosOrder(models.Model):
                 continue
             disc = line.discount
             line.write({
-                'discount': disc == 100 and disc or max(min(line.discount + (
-                        amount / (disc and (price / (100 - disc)) * 100 or price)
-                ) * 100, 100), 0),
+                'discount': disc == 100 and disc or max(min(line.discount + (amount / (disc and (price / (100 - disc)) * 100 or price)) * 100, 100), 0),
             })
             amount -= price - line.price_subtotal_incl
         return amount
